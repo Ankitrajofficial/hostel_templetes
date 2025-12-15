@@ -4,6 +4,7 @@
 function checkAuthState() {
   const token = localStorage.getItem('token');
   const userStr = localStorage.getItem('user');
+  const guestMode = localStorage.getItem('guestMode');
   const signinBtn = document.querySelector('.nav-signin');
   
   if (token && userStr && signinBtn) {
@@ -54,6 +55,14 @@ function checkAuthState() {
     } catch (e) {
       console.error('Error parsing user data:', e);
     }
+  } else if (guestMode === 'true' && signinBtn) {
+    // User is in guest mode - update button to show "Guest"
+    signinBtn.innerHTML = '<i class="fa-solid fa-user"></i> Guest';
+    // Allow guest to click to sign in
+    signinBtn.onclick = (e) => {
+      e.preventDefault();
+      openSigninModal();
+    };
   }
 }
 
@@ -61,12 +70,52 @@ function checkAuthState() {
 function handleLogout() {
   localStorage.removeItem('token');
   localStorage.removeItem('user');
+  localStorage.removeItem('guestMode');
   window.location.reload();
 }
 
+// Handle guest mode
+function handleContinueAsGuest() {
+  localStorage.setItem('guestMode', 'true');
+  localStorage.setItem('hasVisited', 'true');
+  closeSigninModal();
+  
+  // Update navbar to show "Guest"
+  const signinBtn = document.querySelector('.nav-signin');
+  if (signinBtn) {
+    signinBtn.innerHTML = '<i class="fa-solid fa-user"></i> Guest';
+    signinBtn.onclick = (e) => {
+      e.preventDefault();
+      openSigninModal();
+    };
+  }
+}
+
+// Check if first visit and show modal
+function checkFirstVisit() {
+  const hasVisited = localStorage.getItem('hasVisited');
+  const token = localStorage.getItem('token');
+  const guestMode = localStorage.getItem('guestMode');
+  
+  // Only show modal if user hasn't visited, isn't logged in, and isn't in guest mode
+  if (!hasVisited && !token && guestMode !== 'true') {
+    // Small delay to ensure page is loaded
+    setTimeout(() => {
+      openSigninModal();
+      localStorage.setItem('hasVisited', 'true');
+    }, 500);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  // Inject Sign In Modal if not present (for pages like room.html)
+  injectSigninModal();
+
   // Check authentication state
   checkAuthState();
+  
+  // Check if first visit and show modal
+  checkFirstVisit();
   
   // Fetch site settings (Trial Stay banner, etc.)
   fetchSiteSettings();
@@ -319,6 +368,9 @@ async function handleSignin(e) {
       
       // Close modal and redirect based on role
       closeSigninModal();
+      // Remove guest mode when user signs in
+      localStorage.removeItem('guestMode');
+      
       if (data.user.role === 'student') {
         // Students stay on main page (or student dashboard in future)
         window.location.reload();
@@ -484,6 +536,9 @@ async function handleGoogleCredentialResponse(response) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
       
+      // Remove guest mode when user signs in
+      localStorage.removeItem('guestMode');
+      
       // Close modal and redirect
       closeSigninModal();
       if (data.user.role === 'student') {
@@ -538,6 +593,9 @@ async function handleGoogleTokenResponse(tokenResponse) {
     if (result.ok) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Remove guest mode when user signs in
+      localStorage.removeItem('guestMode');
       
       closeSigninModal();
       if (data.user.role === 'student') {
@@ -1391,4 +1449,243 @@ function showNotification(message, type = 'info') {
         notification.style.transition = '0.3s';
         setTimeout(() => notification.remove(), 300);
     }, 4000);
+}
+
+// ==========================================
+// Inject Sign In Modal (for pages missing it)
+// ==========================================
+function injectSigninModal() {
+  // Check if modal already exists
+  if (document.getElementById('signinModal')) return;
+
+  const modalHtml = `
+    <!-- Sign In / Sign Up Modal -->
+    <div id="signinModal" class="signin-modal">
+      <div class="signin-modal-content">
+        <button class="signin-close" onclick="closeSigninModal()">
+          &times;
+        </button>
+        <div class="signin-header">
+          <div class="signin-logo">
+            <i class="fa-solid fa-crown"></i>
+            <span data-config="brandName">MK HEIGHT</span>
+          </div>
+          <!-- Tab Switcher -->
+          <div class="auth-tabs">
+            <button
+              class="auth-tab active"
+              data-tab="signin"
+              onclick="switchAuthTab('signin')"
+            >
+              Sign In
+            </button>
+            <button
+              class="auth-tab"
+              data-tab="signup"
+              onclick="switchAuthTab('signup')"
+            >
+              Sign Up
+            </button>
+          </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <div id="signinFormContainer" class="auth-form-container active">
+          <h2>Welcome Back</h2>
+          <p>Sign in to access your account</p>
+          <form id="signinForm" class="signin-form">
+            <!-- Guest Option -->
+            <div class="guest-option" style="margin-bottom: 20px;">
+              <button type="button" onclick="handleContinueAsGuest()" class="guest-btn">
+                Continue as Guest <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="signin-form-group">
+              <label for="signinEmail"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input
+                type="email"
+                id="signinEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signinPassword"
+                ><i class="fa-solid fa-lock"></i> Password</label
+              >
+              <input
+                type="password"
+                id="signinPassword"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div id="signinError" class="signin-error"></div>
+            <button type="submit" class="signin-btn">
+              <span>Sign In</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span>or continue with</span>
+          </div>
+
+          <!-- Google Sign In Button -->
+          <button
+            type="button"
+            class="google-signin-btn"
+            onclick="handleGoogleSignIn()"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span>Sign in with Google</span>
+          </button>
+
+          <div class="signin-footer">
+            <p>
+              Already have an account?
+              <a href="#" onclick="switchAuthTab('signup'); return false;"
+                >Sign In</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signupFormContainer" class="auth-form-container">
+          <h2>Create Account</h2>
+          <p>Join MK HEIGHT as a student</p>
+          <form id="signupForm" class="signin-form">
+            <div class="signin-form-group">
+              <label for="signupName"
+                ><i class="fa-solid fa-user"></i> Full Name</label
+              >
+              <input
+                type="text"
+                id="signupName"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupEmail"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupPhone"
+                ><i class="fa-solid fa-phone"></i> Phone Number</label
+              >
+              <input
+                type="tel"
+                id="signupPhone"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupPassword"
+                ><i class="fa-solid fa-lock"></i> Password</label
+              >
+              <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create a password (min 6 chars)"
+                required
+                minlength="6"
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupConfirmPassword"
+                ><i class="fa-solid fa-lock"></i> Confirm Password</label
+              >
+              <input
+                type="password"
+                id="signupConfirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+            <div id="signupError" class="signin-error"></div>
+            <div id="signupSuccess" class="signin-success"></div>
+            <button type="submit" class="signin-btn signup-btn">
+              <span>Create Account</span>
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span>or sign up with</span>
+          </div>
+
+          <!-- Google Sign Up Button -->
+          <button
+            type="button"
+            class="google-signin-btn"
+            onclick="handleGoogleSignIn()"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span>Sign up with Google</span>
+          </button>
+
+          <div class="signin-footer">
+            <p>
+              Already have an account?
+              <a href="#" onclick="switchAuthTab('signin'); return false;"
+                >Sign In</a
+              >
+            </p>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
 }

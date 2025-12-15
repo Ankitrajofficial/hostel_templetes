@@ -4698,3 +4698,29 @@ img {
         padding: 14px 24px;
     }
 }
+
+/* Guest Button Style */
+.guest-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  color: #666;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.guest-btn:hover {
+  background: #f5f5f5;
+  border-color: #999;
+  color: #333;
+}

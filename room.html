@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details | MK HEIGHT</title>
+    <meta name="description" content="View room details and book your stay at MK HEIGHT Premium Hostel in Kota">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Config System -->
+    <script src="js/site-config.js"></script>
+    <script src="js/config-loader.js"></script>
+
+    <style>
+        /* Room Detail Page Specific Styles */
+        .room-detail-section {
+            padding: 100px 0 60px;
+            background: var(--color-bg-light);
+            min-height: 100vh;
+        }
+        
+        .room-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Single Column Layout - Images on top, Form below */
+        .room-detail-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .room-detail-left {
+            width: 100%;
+        }
+        
+        .room-detail-right {
+            width: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .room-detail-section {
+                padding: 80px 0 40px;
+            }
+            
+            .room-detail-container {
+                padding: 0 15px;
+            }
+            
+            .booking-form-container {
+                padding: 1.2rem;
+            }
+            
+            .room-detail-info {
+                padding: 1.5rem;
+            }
+            
+            .back-link {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        .room-detail-image {
+            width: 100%;
+            height: 350px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+        }
+        
+        .room-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .room-detail-info {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 2px solid #b8943e;
+        }
+        
+        .room-detail-title {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .room-detail-price {
+            font-size: 1.8rem;
+            color: var(--color-secondary);
+            font-weight: 700;
+            font-family: var(--font-heading);
+            margin-bottom: 1.5rem;
+        }
+        
+        .room-detail-price span {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .room-detail-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .room-detail-amenities span {
+            background: rgba(205, 164, 94, 0.1);
+            color: var(--color-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .room-detail-amenities span i {
+            color: var(--color-secondary);
+        }
+        
+        .room-detail-description {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* Booking Form */
+        .booking-form-container {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border: 2px solid #b8943e;
+        }
+        
+        .booking-form-title {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .booking-form-title i {
+            color: var(--color-secondary);
+        }
+        
+        .booking-form-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        
+        .booking-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        @media (max-width: 600px) {
+            .booking-form .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .booking-form .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .booking-form label {
+            display: block;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .booking-form input,
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .booking-form input:focus,
+        .booking-form select:focus,
+        .booking-form textarea:focus {
+            border-color: var(--color-secondary);
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(205, 164, 94, 0.1);
+        }
+        
+        .booking-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .booking-form .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #cda45e, #b8943e);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .booking-form .btn-submit:hover {
+            background: linear-gradient(135deg, #b8943e, #a0813a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(205, 164, 94, 0.4);
+        }
+        
+        .form-section-title {
+            color: var(--color-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(205, 164, 94, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-section-title i {
+            color: var(--color-secondary);
+        }
+        
+        /* Success Message */
+        .booking-success {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .booking-success.show {
+            display: block;
+        }
+        
+        .booking-success i {
+            font-size: 4rem;
+            color: #22c55e;
+            margin-bottom: 1rem;
+        }
+        
+        .booking-success h3 {
+            color: var(--color-primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .booking-success p {
+            color: #666;
+        }
+        
+        /* Error Message */
+        .form-error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .form-error.show {
+            display: block;
+        }
+        
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-secondary);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--color-primary);
+            transform: translateX(-5px);
+        }
+        
+        /* Amazon-Style Room Gallery */
+        .room-gallery {
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        
+        .room-main-image {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        
+        .room-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .room-main-image:hover img {
+            transform: scale(1.02);
+        }
+        
+        .fullscreen-hint {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            pointer-events: none;
+        }
+        
+        .room-thumbnails {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+        
+        .room-thumbnails::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .room-thumbnails::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        .room-thumbnails::-webkit-scrollbar-thumb {
+            background: var(--color-secondary);
+            border-radius: 3px;
+        }
+        
+        .thumbnail-item {
+            flex: 0 0 auto;
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            opacity: 0.7;
+        }
+        
+        .thumbnail-item:hover {
+            opacity: 1;
+        }
+        
+        .thumbnail-item.active {
+            border-color: var(--color-secondary);
+            opacity: 1;
+            box-shadow: 0 2px 10px rgba(205, 164, 94, 0.4);
+        }
+        
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Mobile Gallery Fixes */
+        @media (max-width: 768px) {
+            .room-main-image {
+                height: 280px;
+                border-radius: 12px;
+            }
+            
+            .thumbnail-item {
+                width: 65px;
+                height: 50px;
+            }
+            
+            .room-thumbnails {
+                gap: 8px;
+            }
+            
+            .fullscreen-hint {
+                padding: 6px 10px;
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* Fullscreen Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(205, 164, 94, 0.9);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(205, 164, 94, 0.9);
+        }
+        
+        .lightbox-nav.prev { left: 30px; }
+        .lightbox-nav.next { right: 30px; }
+        
+        /* Collapsible Booking Form */
+        .booking-form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(205, 164, 94, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        .booking-form-header:hover {
+            opacity: 0.9;
+        }
+        
+        .booking-form-toggle {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #cda45e, #b8943e);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .booking-form-header.expanded .booking-form-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .booking-form-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        
+        .booking-form-body.expanded {
+            max-height: 2000px;
+        }
+        
+        /* Book This Room Button */
+        .btn-book-room {
+            width: 100%;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, #cda45e, #b8943e);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(205, 164, 94, 0.3);
+        }
+        
+        .btn-book-room:hover {
+            background: linear-gradient(135deg, #b8943e, #a0813a);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(205, 164, 94, 0.4);
+        }
+        
+        /* Hostel Gallery Section */
+        .hostel-gallery-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .section-title-center {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title-center h2 {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-title-center p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .hostel-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+        
+        .gallery-item span {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover span {
+            opacity: 1;
+        }
+        
+        /* Student Stories Section */
+        .student-stories-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0a192f 0%, #1a365d 100%);
+        }
+        
+        .student-stories-section .section-title-center h2 {
+            color: #fff;
+        }
+        
+        .student-stories-section .section-title-center p {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .story-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.1);
+            border-color: var(--color-secondary);
+        }
+        
+        .story-quote {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .story-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .story-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #cda45e, #b8943e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .story-info h4 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+        
+        .story-info span {
+            color: var(--color-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .story-badge {
+            display: inline-block;
+            background: rgba(205, 164, 94, 0.2);
+            color: var(--color-secondary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+        
+        @media (max-width: 900px) {
+            .hostel-gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .room-gallery-carousel {
+                height: 250px;
+            }
+            
+            .carousel-nav {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .hostel-gallery-section,
+            .student-stories-section {
+                padding: 50px 0;
+            }
+            
+            .section-title-center h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="/" class="logo"><i class="fa-solid fa-crown"></i> <span data-config="brandName">MK HEIGHT</span></a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#experience">About</a></li>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#rooms">Rooms</a></li>
+                <li><a href="/#staff">Testimonials</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <li><a href="tel:+918094444307" class="nav-phone"><i class="fa-solid fa-phone"></i></a></li>
+                <li><a href="#" class="nav-btn nav-signin"><i class="fa-solid fa-user"></i> Sign In</a></li>
+                <li><a href="/#contact" class="nav-btn nav-book">Book Now</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <!-- Room Detail Section -->
+    <section class="room-detail-section">
+        <div class="room-detail-container">
+            <a href="/#rooms" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Rooms</a>
+            
+            <div class="room-detail-grid">
+                <!-- Left: Room Info -->
+                <div class="room-detail-left">
+                    <!-- Amazon-Style Room Gallery -->
+                    <div class="room-gallery">
+                        <!-- Main Image -->
+                        <div class="room-main-image" onclick="openLightbox()">
+                            <img id="mainRoomImage" src="assets/room-1.png" alt="Room Main View">
+                            <div class="fullscreen-hint"><i class="fa-solid fa-expand"></i> Tap for fullscreen</div>
+                        </div>
+                        <!-- Thumbnail Strip -->
+                        <div class="room-thumbnails">
+                            <div class="thumbnail-item active" onclick="selectThumbnail(0)">
+                                <img src="assets/room-1.png" alt="Room View 1">
+                            </div>
+                            <div class="thumbnail-item" onclick="selectThumbnail(1)">
+                                <img src="assets/room-1.png" alt="Room View 2">
+                            </div>
+                            <div class="thumbnail-item" onclick="selectThumbnail(2)">
+                                <img src="assets/room-1.png" alt="Room View 3">
+                            </div>
+                            <div class="thumbnail-item" onclick="selectThumbnail(3)">
+                                <img src="assets/room-1.png" alt="Room View 4">
+                            </div>
+                            <div class="thumbnail-item" onclick="selectThumbnail(4)">
+                                <img src="assets/room-1.png" alt="Room View 5">
+                            </div>
+                            <div class="thumbnail-item" onclick="selectThumbnail(5)">
+                                <img src="assets/room-1.png" alt="Room View 6">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="room-detail-info">
+                        <h1 class="room-detail-title" id="roomTitle">Single Room</h1>
+                        <div class="room-detail-price" id="roomPrice">₹13,000<span>/month</span></div>
+                        <div class="room-detail-amenities" id="roomAmenities">
+                            <span><i class="fa-solid fa-bed"></i> Single Bed</span>
+                            <span><i class="fa-solid fa-snowflake"></i> AC</span>
+                            <span><i class="fa-solid fa-shower"></i> Attached Bath</span>
+                            <span><i class="fa-solid fa-chair"></i> Study Desk</span>
+                        </div>
+                        <p class="room-detail-description" id="roomDescription">
+                            Your private sanctuary for focused NEET preparation. This comfortable single room comes with all essentials for a productive study environment.
+                        </p>
+                        <button class="btn-book-room" onclick="scrollToBookingForm()">
+                            <i class="fa-solid fa-calendar-check"></i> Book This Room
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right: Booking Form -->
+                <div class="room-detail-right">
+                    <div class="booking-form-container">
+                        <!-- Collapsible Header -->
+                        <div class="booking-form-header" id="bookingFormHeader" onclick="toggleBookingForm()">
+                            <div>
+                                <h2 class="booking-form-title" style="margin-bottom: 5px;"><i class="fa-solid fa-calendar-check"></i> Book This Room</h2>
+                                <p class="booking-form-subtitle" style="margin-bottom: 0;">Tap to fill booking form</p>
+                            </div>
+                            <button class="booking-form-toggle" type="button"><i class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                        
+                        <!-- Collapsible Body -->
+                        <div class="booking-form-body" id="bookingFormBody">
+                            <div class="form-error" id="formError"></div>
+                            
+                            <form id="bookingForm" class="booking-form">
+                            <!-- Personal Details -->
+                            <div class="form-section-title"><i class="fa-solid fa-user"></i> Personal Details</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210">
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" id="city" name="city" placeholder="Your city">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" id="address" name="address" placeholder="Your full address">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" id="state" name="state" placeholder="Your state">
+                                </div>
+                            </div>
+                            
+                            <!-- Academic Details -->
+                            <div class="form-section-title"><i class="fa-solid fa-book-open"></i> Academic Details</div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="course">Course / Exam *</label>
+                                    <select id="course" name="course" required>
+                                        <option value="">Select Course</option>
+                                        <option value="NEET">NEET</option>
+                                        <option value="JEE">JEE</option>
+                                        <option value="Foundation">Foundation</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="coaching">Coaching Institute</label>
+                                    <select id="coaching" name="coaching">
+                                        <option value="">Select Coaching</option>
+                                        <option value="Allen">Allen</option>
+                                        <option value="Resonance">Resonance</option>
+                                        <option value="Motion">Motion</option>
+                                        <option value="Vibrant">Vibrant</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Room Preference -->
+                            <div class="form-section-title"><i class="fa-solid fa-door-open"></i> Room Preference</div>
+                            <div class="form-group">
+                                <label for="roomPreference">Preferred Room Type</label>
+                                <select id="roomPreference" name="roomPreference">
+                                    <option value="single">Single Room - ₹13,000/month</option>
+                                    <option value="single_balcony">Single + Balcony - ₹14,000/month</option>
+                                    <option value="double">Double Room - ₹10,000/month</option>
+                                    <option value="double_balcony">Double + Balcony - ₹11,000/month</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Pickup Service -->
+                            <div class="form-section-title"><i class="fa-solid fa-car"></i> Pickup Service</div>
+                            <div class="form-group">
+                                <label for="pickupLocation">Do you need pickup service?</label>
+                                <select id="pickupLocation" name="pickupLocation">
+                                    <option value="none">No pickup needed</option>
+                                    <option value="kota_junction">Kota Junction Railway Station</option>
+                                    <option value="dakniya_talawa">Dakniya Talawa Railway Station</option>
+                                    <option value="bus_stand">Kota Bus Stand</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Message -->
+                            <div class="form-section-title"><i class="fa-solid fa-message"></i> Additional Info</div>
+                            <div class="form-group">
+                                <label for="message">Message / Questions (Optional)</label>
+                                <textarea id="message" name="message" placeholder="Any specific requirements or questions..."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit">
+                                <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
+                            </button>
+                            </form>
+                        </div>
+                        
+                        <!-- Success Message -->
+                        <div class="booking-success" id="bookingSuccess">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h3>Thank You!</h3>
+                            <p>Your booking request has been submitted successfully. We will contact you within 24 hours.</p>
+                            <a href="/" class="btn-submit" style="margin-top: 1.5rem; display: inline-flex;"><i class="fa-solid fa-home"></i> Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hostel Amenities Section -->
+    <section class="hostel-gallery-section" style="padding-bottom: 20px;">
+        <div class="section-title-center" style="margin-bottom: 2rem;">
+            <h2><i class="fa-solid fa-spa"></i> Hostel Amenities</h2>
+            <p>Premium facilities designed for your comfort and growth</p>
+        </div>
+        <div id="room-amenities-grid" class="hostel-gallery-grid">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Hostel Campus Section -->
+    <section class="hostel-gallery-section" style="padding-top: 20px;">
+        <div class="section-title-center" style="margin-bottom: 2rem;">
+            <h2><i class="fa-solid fa-building"></i> Hostel Campus</h2>
+            <p>A vibrant environment for focused learning</p>
+        </div>
+        <div id="room-campus-grid" class="hostel-gallery-grid">
+            <!-- Populated by JS -->
+        </div>
+    </section>
+
+    <!-- Student Stories Section -->
+    <section class="student-stories-section">
+        <div class="section-title-center">
+            <h2><i class="fa-solid fa-quote-left"></i> Student Stories</h2>
+            <p>Hear from students who achieved their dreams while staying with us</p>
+        </div>
+        <div class="stories-grid">
+            <!-- Story 1 -->
+            <div class="story-card">
+                <p class="story-quote">"The focused environment at MK HEIGHT was crucial for my NEET preparation. The study-friendly rooms and helpful staff made all the difference. I scored 680+ and got into my dream medical college!"</p>
+                <div class="story-author">
+                    <div class="story-avatar">AR</div>
+                    <div class="story-info">
+                        <h4>Aarav Sharma</h4>
+                        <span>NEET 2023 | AIR 1,245</span>
+                        <div class="story-badge"><i class="fa-solid fa-award"></i> AIIMS Delhi</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 2 -->
+            <div class="story-card">
+                <p class="story-quote">"Coming from a small town, I was worried about adjusting. But MK HEIGHT became my second home. The food was amazing, rooms were clean, and I made friends for life. Cleared NEET in first attempt!"</p>
+                <div class="story-author">
+                    <div class="story-avatar">PS</div>
+                    <div class="story-info">
+                        <h4>Priya Singh</h4>
+                        <span>NEET 2023 | AIR 3,892</span>
+                        <div class="story-badge"><i class="fa-solid fa-award"></i> KGMU Lucknow</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Story 3 -->
+            <div class="story-card">
+                <p class="story-quote">"The quiet study environment and 24/7 electricity backup helped me study without any disturbance. The wardens are supportive and the location near Allen was perfect for me."</p>
+                <div class="story-author">
+                    <div class="story-avatar">RK</div>
+                    <div class="story-info">
+                        <h4>Rahul Kumar</h4>
+                        <span>NEET 2024 | AIR 2,567</span>
+                        <div class="story-badge"><i class="fa-solid fa-award"></i> JIPMER Puducherry</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section" style="background: #0a192f; padding: 2rem 0;">
+        <div class="container" style="text-align: center; color: rgba(255,255,255,0.7);">
+            <p>&copy; 2024 <span data-config="brandName">MK HEIGHT</span>. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-times"></i></button>
+        <button class="lightbox-nav prev" onclick="changeLightboxSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="assets/room-1.png" alt="Room Full View">
+        </div>
+        <button class="lightbox-nav next" onclick="changeLightboxSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <script>
+        // Room Data
+        const roomData = {
+            single: {
+                title: 'Single Room',
+                price: '₹13,000',
+                image: 'assets/room-1.png',
+                amenities: [
+                    { icon: 'fa-bed', text: 'Single Bed' },
+                    { icon: 'fa-snowflake', text: 'AC' },
+                    { icon: 'fa-shower', text: 'Attached Bath' },
+                    { icon: 'fa-chair', text: 'Study Desk' }
+                ],
+                description: 'Your private sanctuary for focused NEET preparation. This comfortable single room comes with all essentials for a productive study environment including air conditioning, attached bathroom, and a dedicated study desk.'
+            },
+            single_balcony: {
+                title: 'Single Room + Balcony',
+                price: '₹14,000',
+                image: 'assets/room-1.png',
+                amenities: [
+                    { icon: 'fa-bed', text: 'Single Bed' },
+                    { icon: 'fa-snowflake', text: 'AC' },
+                    { icon: 'fa-door-open', text: 'Balcony' },
+                    { icon: 'fa-shower', text: 'Attached Bath' }
+                ],
+                description: 'Enjoy fresh air breaks between study sessions with your own private balcony. This premium single room includes all standard amenities plus a personal outdoor space for relaxation.'
+            },
+            double: {
+                title: 'Double Room',
+                price: '₹10,000',
+                image: 'assets/room-1.png',
+                amenities: [
+                    { icon: 'fa-bed', text: '2 Beds' },
+                    { icon: 'fa-snowflake', text: 'AC' },
+                    { icon: 'fa-shower', text: 'Attached Bath' },
+                    { icon: 'fa-chair', text: '2 Study Desks' }
+                ],
+                description: 'Share your journey with a like-minded future doctor. This spacious double room offers two comfortable beds, individual study desks, and all essential amenities for focused preparation.'
+            },
+            double_balcony: {
+                title: 'Double Room + Balcony',
+                price: '₹11,000',
+                image: 'assets/room-1.png',
+                amenities: [
+                    { icon: 'fa-bed', text: '2 Beds' },
+                    { icon: 'fa-snowflake', text: 'AC' },
+                    { icon: 'fa-door-open', text: 'Balcony' },
+                    { icon: 'fa-shower', text: 'Attached Bath' }
+                ],
+                description: 'Premium shared accommodation with a private balcony. Perfect for aspiring medical partners who want the best of both worlds - shared motivation and personal relaxation space.'
+            }
+        };
+
+        // Get room type from URL
+        function getRoomType() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('type') || 'single';
+        }
+
+        // Populate room details
+        function populateRoomDetails() {
+            const type = getRoomType();
+            const room = roomData[type] || roomData.single;
+
+            document.getElementById('roomTitle').textContent = room.title;
+            document.getElementById('roomPrice').innerHTML = `${room.price}<span>/month</span>`;
+            document.getElementById('mainRoomImage').src = room.image;
+            document.getElementById('roomDescription').textContent = room.description;
+            document.getElementById('roomPreference').value = type;
+            document.title = `${room.title} | ${SiteConfig.brandName}`;
+
+            // Populate amenities
+            const amenitiesHtml = room.amenities.map(a => 
+                `<span><i class="fa-solid ${a.icon}"></i> ${a.text}</span>`
+            ).join('');
+            document.getElementById('roomAmenities').innerHTML = amenitiesHtml;
+        }
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formError = document.getElementById('formError');
+            formError.classList.remove('show');
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                course: document.getElementById('course').value,
+                coaching: document.getElementById('coaching').value,
+                roomPreference: document.getElementById('roomPreference').value,
+                pickupLocation: document.getElementById('pickupLocation').value,
+                message: document.getElementById('message').value
+            };
+
+            try {
+                const response = await fetch('/api/queries', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('bookingForm').style.display = 'none';
+                    document.getElementById('bookingSuccess').classList.add('show');
+                } else {
+                    formError.textContent = data.message || 'Something went wrong. Please try again.';
+                    formError.classList.add('show');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                formError.textContent = 'Network error. Please check your connection and try again.';
+                formError.classList.add('show');
+            }
+        });
+
+        // Hamburger menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            this.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // ===== Amazon-Style Image Gallery =====
+        let currentImageIndex = 0;
+        const thumbnails = document.querySelectorAll('.thumbnail-item');
+        const mainImage = document.getElementById('mainRoomImage');
+        
+        function selectThumbnail(index) {
+            // Remove active from current thumbnail
+            thumbnails[currentImageIndex].classList.remove('active');
+            
+            // Add active to new thumbnail
+            currentImageIndex = index;
+            thumbnails[currentImageIndex].classList.add('active');
+            
+            // Update main image
+            const thumbImg = thumbnails[currentImageIndex].querySelector('img');
+            mainImage.src = thumbImg.src;
+        }
+        
+        // ===== Fullscreen Lightbox =====
+        function openLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            lightboxImg.src = mainImage.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function changeLightboxSlide(direction) {
+            // Remove active from current thumbnail
+            thumbnails[currentImageIndex].classList.remove('active');
+            
+            // Calculate new index
+            currentImageIndex += direction;
+            if (currentImageIndex >= thumbnails.length) currentImageIndex = 0;
+            if (currentImageIndex < 0) currentImageIndex = thumbnails.length - 1;
+            
+            // Add active to new thumbnail
+            thumbnails[currentImageIndex].classList.add('active');
+            
+            // Update both main image and lightbox image
+            const thumbImg = thumbnails[currentImageIndex].querySelector('img');
+            mainImage.src = thumbImg.src;
+            document.getElementById('lightboxImage').src = thumbImg.src;
+        }
+        
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeLightboxSlide(-1);
+            if (e.key === 'ArrowRight') changeLightboxSlide(1);
+        });
+        
+        // ===== Collapsible Booking Form =====
+        function toggleBookingForm() {
+            const header = document.getElementById('bookingFormHeader');
+            const body = document.getElementById('bookingFormBody');
+            header.classList.toggle('expanded');
+            body.classList.toggle('expanded');
+        }
+        
+        // ===== Scroll to Booking Form =====
+        function scrollToBookingForm() {
+            const header = document.getElementById('bookingFormHeader');
+            const body = document.getElementById('bookingFormBody');
+            
+            // Expand the form if collapsed
+            if (!body.classList.contains('expanded')) {
+                header.classList.add('expanded');
+                body.classList.add('expanded');
+            }
+            
+            // Scroll to the form
+            document.querySelector('.booking-form-container').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+        
+        // ===== Dynamic Hostel Gallery Loading =====
+        async function loadRoomGalleryContent() {
+            try {
+                const response = await fetch('/api/settings');
+                if (!response.ok) return;
+                const { settings } = await response.json();
+
+                // 1. Hostel Amenities
+                const amenitiesImages = (settings.amenitiesImages || []).map(img => ({
+                    src: img,
+                    title: 'Hostel Amenities',
+                    caption: 'Premium facilities'
+                }));
+                renderRoomGalleryGrid('room-amenities-grid', amenitiesImages);
+
+                // 2. Hostel Campus
+                const campusImages = (settings.campusImages || []).map(img => ({
+                    src: img,
+                    title: 'Hostel Campus',
+                    caption: 'Campus Environment'
+                }));
+                renderRoomGalleryGrid('room-campus-grid', campusImages);
+
+            } catch (error) {
+                console.error('Error loading gallery content:', error);
+            }
+        }
+
+        function renderRoomGalleryGrid(containerId, items) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            if (items.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #777;">No images available.</p>';
+                return;
+            }
+
+            container.innerHTML = items.map(item => `
+                <div class="gallery-item" onclick="openDynamicLightbox('${item.src}')">
+                    <img src="${item.src}" alt="${item.title}">
+                    <span><i class="fa-solid fa-expand"></i> ${item.title}</span>
+                </div>
+            `).join('');
+        }
+
+        // Simple Lightbox for Dynamic Images
+        function openDynamicLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            
+            // Hide nav buttons since we are not tracking index for simple view
+            const navs = lightbox.querySelectorAll('.lightbox-nav');
+            navs.forEach(n => n.style.display = 'none');
+            
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Re-show navs when closed (cleanup)
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            const originalClose = closeBtn.onclick;
+            
+            closeBtn.onclick = function() {
+                closeLightbox(); // Call original close
+                navs.forEach(n => n.style.display = ''); // Restore navs
+                closeBtn.onclick = originalClose; // Restore handler
+            };
+        }
+
+        // Initialize
+        populateRoomDetails();
+        loadRoomGalleryContent();
+    </script>
+    
+    <!-- Main site script for auth handling -->
+    <script src="/script.js"></script>
+</body>
+</html>

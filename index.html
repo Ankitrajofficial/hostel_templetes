@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MK HEIGHT | Premium Luxury Hostel</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Sign-In -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Config System -->
+    <script src="js/site-config.js"></script>
+    <script src="js/config-loader.js"></script>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container navbar-container">
+        <a href="#" class="logo"
+          ><i class="fa-solid fa-crown"></i>
+          <span data-config="brandName">MK HEIGHT</span></a
+        >
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#experience">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#staff">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="tel:+918094444307" class="nav-phone"
+              ><i class="fa-solid fa-phone"></i
+            ></a>
+          </li>
+          <li>
+            <a href="#" class="nav-btn nav-signin"
+              ><i class="fa-solid fa-user"></i> Sign In</a
+            >
+          </li>
+          <li><a href="#contact" class="nav-btn nav-book">Book Now</a></li>
+        </ul>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+      </div>
+    </nav>
+
+    <!-- Hero Section - Carousel Style -->
+    <header id="home" class="hero-carousel">
+      <div class="hero-slider-container">
+        <!-- Hero Slides -->
+        <div class="hero-slider-track">
+          <!-- Slide 1 -->
+          <div class="hero-slide active">
+            <img src="assets/hero-bg.png" alt="Luxury Study Environment" />
+            <div class="hero-overlay"></div>
+            <div class="hero-slide-content">
+              <div class="medical-badge">
+                <i class="fa-solid fa-user-doctor"></i> Exclusive for Medical
+                Aspirants
+              </div>
+              <h2>Your Gateway to AIIMS</h2>
+              <h1>Focused Living for Future Doctors</h1>
+              <div class="hero-btns">
+                <a href="#rooms" class="btn btn-gold">View Accommodation</a>
+                <a href="#contact" class="btn btn-outline">Contact Us</a>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="hero-slide">
+            <img src="assets/experience.png" alt="Study Environment" />
+            <div class="hero-overlay"></div>
+            <div class="hero-slide-content">
+              <h2>Premium Study Spaces</h2>
+              <h1>24/7 Silent Study Zones</h1>
+              <p>
+                Quiet, air-conditioned study areas designed for deep focus and
+                productivity
+              </p>
+              <div class="hero-btns">
+                <a href="#amenities" class="btn btn-gold">Our Amenities</a>
+                <a href="#contact" class="btn btn-outline">Enquire Now</a>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="hero-slide">
+            <img src="assets/room-1.png" alt="Comfortable Rooms" />
+            <div class="hero-overlay"></div>
+            <div class="hero-slide-content">
+              <h2>Comfortable Living</h2>
+              <h1>Your Home Away From Home</h1>
+              <p>
+                Fully furnished rooms with attached washrooms and premium
+                amenities
+              </p>
+              <div class="hero-btns">
+                <a href="#rooms" class="btn btn-gold">View Rooms</a>
+                <a href="#contact" class="btn btn-outline">Book Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation Arrows -->
+        <button class="hero-nav-btn hero-prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="hero-nav-btn hero-next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        <!-- Scroll Down Indicator -->
+        <div class="hero-scroll-indicator">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <!-- Dot Indicators -->
+        <div class="hero-dots">
+          <span class="hero-dot active" data-index="0"></span>
+          <span class="hero-dot" data-index="1"></span>
+          <span class="hero-dot" data-index="2"></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Experience Section with Trial Stay Card -->
+    <section id="experience" class="section-padding bg-light">
+      <div class="container experience-grid-with-trial">
+        <div class="experience-text">
+          <h2 class="section-title text-dark">The Philosophy</h2>
+          <h3 class="section-subtitle text-dark">
+            Your Success is Our Priority
+          </h3>
+          <p class="text-dark">
+            <span data-config="brandName">MK HEIGHT</span> is designed
+            specifically for students preparing for NEET and other competitive
+            exams. We believe your environment dictates your performance. That's
+            why we offer a silent, secure, and supportive space where you can
+            focus entirely on your goals.
+          </p>
+          <ul class="experience-features text-dark">
+            <li>
+              <span class="bullet"
+                ><i class="fa-solid fa-book-open-reader"></i
+              ></span>
+              24/7 Silent Study Zones
+            </li>
+            <li>
+              <span class="bullet"><i class="fa-solid fa-wifi"></i></span>
+              High-Speed WiFi for Online Classes
+            </li>
+            <li>
+              <span class="bullet"
+                ><i class="fa-solid fa-apple-whole"></i
+              ></span>
+              Nutritious Brain Food Menu
+            </li>
+          </ul>
+        </div>
+
+        <!-- Trial Stay Card (Hidden by default, shown via JS when enabled) -->
+        <div
+          id="trialStayBanner"
+          class="trial-stay-card-inline"
+          style="display: none"
+        >
+          <div class="trial-stay-card-badge">
+            <i class="fa-solid fa-star"></i> Limited Offer
+          </div>
+          <div class="trial-stay-card-image">
+            <img src="assets/room-1.png" alt="Trial Stay Room" />
+            <div class="trial-stay-card-overlay">
+              <div class="trial-stay-price-box">
+                <span class="price-amount"
+                  >₹<span id="trialStayPriceDisplay">500</span></span
+                >
+                <span class="price-period">/night</span>
+              </div>
+            </div>
+          </div>
+          <div class="trial-stay-card-content">
+            <h3 id="trialStayTitleDisplay" class="trial-stay-card-title">
+              Try Before You Stay
+            </h3>
+            <p id="trialStayDescDisplay" class="trial-stay-card-desc">
+              Book a trial stay! Explore Kota & get admission guidance.
+            </p>
+            <ul class="trial-stay-card-features-mini">
+              <li><i class="fa-solid fa-van-shuttle"></i> Free Pickup</li>
+              <li><i class="fa-solid fa-graduation-cap"></i> Admission Help</li>
+            </ul>
+            <button onclick="openTrialStayModal()" class="trial-stay-card-btn">
+              <i class="fa-solid fa-calendar-check"></i> Book Trial Stay
+            </button>
+          </div>
+        </div>
+
+        <div class="experience-image" id="experienceImage">
+          <img src="assets/experience.png" alt="Quiet Study Area" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">STUDENT ACCOMMODATION</h4>
+          <h2 class="section-title text-dark">Study-Focused Rooms</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div id="rooms-grid-dynamic" class="rooms-grid-2x2">
+          <!-- Static content replaced by dynamic loading. See loadRoomCards() in script.js -->
+          <div
+            class="gallery-placeholder"
+            style="grid-column: 1/-1; text-align: center"
+          >
+            Loading rooms...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dining Section - Compact Single Frame Design -->
+    <section id="dining" class="dining-compact-section">
+      <div class="dining-compact-container">
+        <!-- Left: Featured Image -->
+        <div class="dining-image-side">
+          <img src="assets/dining-1.png" alt="Gourmet Dining" />
+          <div class="dining-image-overlay">
+            <h4 class="dining-compact-subtitle">FUEL YOUR SUCCESS</h4>
+            <h2 class="dining-compact-title">Student Mess</h2>
+            <p>Brain-boosting nutrition for long study sessions</p>
+            <div class="dining-features-mini">
+              <span><i class="fa-solid fa-leaf"></i> 100% Veg</span>
+              <span><i class="fa-solid fa-droplet"></i> RO Water</span>
+              <span><i class="fa-solid fa-broom"></i> Hygienic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Info Cards -->
+        <div class="dining-info-side">
+          <!-- Timings -->
+          <div class="dining-compact-card">
+            <div class="compact-card-header">
+              <i class="fa-regular fa-clock"></i>
+              <h3>Mess Timings</h3>
+            </div>
+            <div class="compact-timings">
+              <div class="compact-time-row">
+                <span class="meal"
+                  ><i class="fa-solid fa-mug-hot"></i> Breakfast</span
+                >
+                <span class="time">07:30 - 09:30</span>
+              </div>
+              <div class="compact-time-row">
+                <span class="meal"
+                  ><i class="fa-solid fa-bowl-rice"></i> Lunch</span
+                >
+                <span class="time">12:30 - 02:30</span>
+              </div>
+              <div class="compact-time-row">
+                <span class="meal"
+                  ><i class="fa-solid fa-mug-saucer"></i> Tea</span
+                >
+                <span class="time">05:00 - 06:00</span>
+              </div>
+              <div class="compact-time-row">
+                <span class="meal"
+                  ><i class="fa-solid fa-moon"></i> Dinner</span
+                >
+                <span class="time">08:00 - 10:00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weekly Menu - Enhanced -->
+          <div class="dining-compact-card weekly-menu-card" id="weeklyMenuCard">
+            <div class="compact-card-header">
+              <i class="fa-solid fa-calendar-week"></i>
+              <h3>Weekly Menu</h3>
+              <div class="header-badges">
+                <span class="menu-badge">Veg Only 🥬</span>
+                <span
+                  class="menu-special-badge"
+                  id="menuSpecialBadge"
+                  style="display: none"
+                  >⭐ Special!</span
+                >
+              </div>
+            </div>
+            <div class="weekly-menu-tabs">
+              <button class="menu-tab active" data-day="monday">Mon</button>
+              <button class="menu-tab" data-day="tuesday">Tue</button>
+              <button class="menu-tab" data-day="wednesday">Wed</button>
+              <button class="menu-tab" data-day="thursday">Thu</button>
+              <button class="menu-tab" data-day="friday">Fri</button>
+              <button class="menu-tab" data-day="saturday">Sat</button>
+              <button class="menu-tab" data-day="sunday">Sun</button>
+            </div>
+            <div class="weekly-menu-content" id="weeklyMenuContent">
+              <div class="menu-meals">
+                <div class="meal-item">
+                  <span class="meal-time">🌅 Breakfast</span>
+                  <span class="meal-dish" id="menuBreakfast">Loading...</span>
+                </div>
+                <div class="meal-item">
+                  <span class="meal-time">☀️ Lunch</span>
+                  <span class="meal-dish" id="menuLunch">Loading...</span>
+                </div>
+                <div class="meal-item">
+                  <span class="meal-time">🌙 Dinner</span>
+                  <span class="meal-dish" id="menuDinner">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">SUPPORTING YOUR JOURNEY</h4>
+          <h2 class="section-title">Services for Students</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <i class="fa-solid fa-book-open"></i>
+            </div>
+            <h3>Reading Library</h3>
+            <p>
+              A dedicated silent zone with comfortable seating, perfect for mock
+              tests and late-night revisions.
+            </p>
+            <a href="#gallery" class="service-link"
+              >View Facility <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h3>Hygienic Mess</h3>
+            <p>
+              We understand that health is wealth. Our kitchen provides balanced
+              meals to keep your immunity high.
+            </p>
+            <a href="#dining" class="service-link"
+              >Check Menu <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div class="service-icon-box">
+              <i class="fa-solid fa-bus"></i>
+            </div>
+            <h3>Transport</h3>
+            <p>
+              Scheduled shuttle services to major coaching institutes in the
+              city, ensuring you are never late for class.
+            </p>
+            <a href="/transport.html" class="service-link"
+              >Route Map <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why MK Height Section -->
+    <section id="why-us" class="section-padding bg-darker text-white">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">THE COMPETITIVE EDGE</h4>
+          <h2 class="section-title">Why Top Rankers Choose Us</h2>
+          <div class="title-underline"></div>
+        </div>
+        <div class="amenities-grid">
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-person-walking"></i>
+            </div>
+            <h4>Walking Distance</h4>
+            <p>
+              Just 5 mins from Major Coaching Institutes (Allen, Resonance).
+            </p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-ban"></i></div>
+            <h4>No Distractions</h4>
+            <p>Strict disciple and silence policies to ensure deep work.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+            <h4>Peer Learning</h4>
+            <p>Surround yourself with like-minded future doctors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">FACILITIES</h4>
+          <h2 class="section-title">Hostel Amenities</h2>
+          <div class="title-underline"></div>
+          <p class="section-desc">
+            Premium facilities to make your stay comfortable and productive.
+          </p>
+        </div>
+        <div class="amenities-grid">
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-book-open-reader"></i>
+            </div>
+            <h4>Library</h4>
+            <p>Quiet reading space for focused study sessions.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-gamepad"></i></div>
+            <h4>Game Zone</h4>
+            <p>Recreation area to relax and unwind.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-film"></i></div>
+            <h4>Theatre</h4>
+            <p>Mini theatre for movies and entertainment.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-basketball"></i>
+            </div>
+            <h4>Playground</h4>
+            <p>Outdoor sports area for physical fitness.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-wifi"></i></div>
+            <h4>High-Speed WiFi</h4>
+            <p>Uninterrupted net for online lectures.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h4>24/7 Power Backup</h4>
+            <p>Never let a power cut stop your prep.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-shower"></i></div>
+            <h4>Hot Water Supply</h4>
+            <p>24/7 geyser facility for your comfort.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-broom"></i></div>
+            <h4>Daily Housekeeping</h4>
+            <p>Clean rooms so you can focus on study.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h4>CCTV Security</h4>
+            <p>Safe environment for all students.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-glass-water"></i>
+            </div>
+            <h4>RO Water Cooler</h4>
+            <p>Clean and safe drinking water.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon"><i class="fa-solid fa-shirt"></i></div>
+            <h4>Laundry Service</h4>
+            <p>Hassle-free clothes washing facility.</p>
+          </div>
+          <div class="amenity-item">
+            <div class="amenity-icon">
+              <i class="fa-solid fa-square-parking"></i>
+            </div>
+            <h4>Parking Area</h4>
+            <p>Secure parking for bikes and scooters.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section - Amazon Style -->
+    <section id="gallery" class="section-padding">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">EXPLORE</h4>
+          <h2 class="section-title text-dark">Our Hostel Gallery</h2>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="gallery-row">
+          <!-- Column 1: Hostel Campus -->
+          <div class="gallery-column">
+            <h4 class="gallery-column-title">
+              <i class="fa-solid fa-building"></i> Hostel Campus
+            </h4>
+            <div class="amazon-gallery" data-gallery="campus">
+              <div class="main-image-container">
+                <img
+                  src="assets/room-1.png"
+                  alt="Hostel Campus"
+                  class="main-gallery-image"
+                  id="campus-main"
+                />
+              </div>
+              <div class="thumbnail-row">
+                <img
+                  src="assets/room-1.png"
+                  alt="Campus 1"
+                  class="gallery-thumb active"
+                  onclick="switchMainImage('campus', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Campus 2"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('campus', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Campus 3"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('campus', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Campus 4"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('campus', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Campus 5"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('campus', this)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Rooms Gallery -->
+          <div class="gallery-column">
+            <h4 class="gallery-column-title">
+              <i class="fa-solid fa-bed"></i> Premium Rooms
+            </h4>
+            <div class="amazon-gallery" data-gallery="rooms">
+              <div class="main-image-container">
+                <img
+                  src="assets/room-1.png"
+                  alt="Premium Rooms"
+                  class="main-gallery-image"
+                  id="rooms-main"
+                />
+              </div>
+              <div class="thumbnail-row">
+                <img
+                  src="assets/room-1.png"
+                  alt="Room 1"
+                  class="gallery-thumb active"
+                  onclick="switchMainImage('rooms', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Room 2"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('rooms', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Room 3"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('rooms', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Room 4"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('rooms', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Room 5"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('rooms', this)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Amenities -->
+          <div class="gallery-column">
+            <h4 class="gallery-column-title">
+              <i class="fa-solid fa-spa"></i> Amenities
+            </h4>
+            <div class="amazon-gallery" data-gallery="amenities">
+              <div class="main-image-container">
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenities"
+                  class="main-gallery-image"
+                  id="amenities-main"
+                />
+              </div>
+              <div class="thumbnail-row">
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenity 1"
+                  class="gallery-thumb active"
+                  onclick="switchMainImage('amenities', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenity 2"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('amenities', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenity 3"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('amenities', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenity 4"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('amenities', this)"
+                />
+                <img
+                  src="assets/room-1.png"
+                  alt="Amenity 5"
+                  class="gallery-thumb"
+                  onclick="switchMainImage('amenities', this)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="galleryLightbox" class="lightbox-modal">
+      <span class="lightbox-close" onclick="closeGalleryLightbox()"
+        >&times;</span
+      >
+      <img class="lightbox-content" id="lightboxImage" />
+      <div id="lightboxCaption"></div>
+    </div>
+
+    <!-- Staff Section -->
+    <section id="staff" class="section-padding bg-light">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">MEET OUR TEAM</h4>
+          <h2 class="section-title text-dark">Our Hotel Staff</h2>
+          <div class="title-underline"></div>
+          <p class="section-desc text-dark">
+            Dedicated professionals committed to making your stay exceptional.
+          </p>
+        </div>
+
+        <div id="staff-grid-dynamic" class="staff-grid">
+          <!-- Staff loaded dynamically from API -->
+          <p
+            style="
+              text-align: center;
+              color: var(--text-muted);
+              grid-column: 1/-1;
+            "
+          >
+            Loading team...
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding contact-bg">
+      <div class="container">
+        <div class="text-center mb-5">
+          <h4 class="section-subtitle-sm">GET IN TOUCH</h4>
+          <h2 class="section-title">Contact Us</h2>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="contact-container">
+          <!-- Left Column: Contact Info -->
+          <div class="contact-info-col">
+            <h3 class="contact-col-title">Visit Us</h3>
+            <p class="contact-desc">
+              We'd love to hear from you. Reach out for reservations, inquiries,
+              or just to say hello. Experience the finest hospitality in Kota.
+            </p>
+
+            <div class="contact-cards-grid">
+              <!-- Location Card -->
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>Location</h4>
+                  <p>
+                    <span data-config="address"
+                      >MK Heights, Coral Park, Near Suwalka Emerald, Bundi Road,
+                      Kunadi, Kota, Rajasthan 324008</span
+                    >
+                  </p>
+                  <a
+                    href="#"
+                    data-config-href="googleMapsLink"
+                    target="_blank"
+                    class="direction-link"
+                    >Get Directions <i class="fa-solid fa-arrow-right"></i
+                  ></a>
+                </div>
+              </div>
+
+              <!-- Phone Card -->
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>Phone</h4>
+                  <p class="gold-text" data-config="phone">+91 80944 44307</p>
+                </div>
+              </div>
+
+              <!-- Email Card -->
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>Email</h4>
+                  <p class="gold-text" data-config="email">
+                    mkheight@gmail.com
+                  </p>
+                </div>
+              </div>
+
+              <!-- Hours Card -->
+              <div class="contact-card">
+                <div class="contact-icon">
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div class="contact-details">
+                  <h4>Reception Hours</h4>
+                  <p>24/7 Available</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="connect-section mt-4">
+              <h4 class="mb-3">Connect With Us</h4>
+              <div class="social-links large">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Form -->
+          <div class="contact-form-col">
+            <div class="contact-form-box">
+              <h3 class="contact-col-title">Send us a Message</h3>
+              <form id="contactForm" class="contact-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="contactName"
+                      placeholder="Your Name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      id="contactEmail"
+                      placeholder="Email Address"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <input
+                      type="tel"
+                      id="contactPhone"
+                      placeholder="Phone Number"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="contactCourse"
+                      placeholder="Target Exams (e.g. NEET 2025)"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <textarea
+                    id="contactMessage"
+                    rows="5"
+                    placeholder="Your Message / Query"
+                    required
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="btn-gold-filled full-width"
+                  id="contactSubmitBtn"
+                >
+                  Send Message <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="map-container mt-4">
+              <iframe
+                src="https://maps.google.com/maps?q=MK+Heights+Kota+Coral+Park&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="250"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section">
+      <!-- Partners Bar -->
+      <div class="partners-bar">
+        <div class="container">
+          <p><span>🏠 Welcome to the Family</span></p>
+        </div>
+      </div>
+
+      <!-- Main Footer Content -->
+      <div class="footer-content section-padding">
+        <div class="container">
+          <div class="footer-grid">
+            <!-- Column 1: Brand -->
+            <div class="footer-col brand-col">
+              <div class="footer-logo">
+                <i class="fa-solid fa-crown text-gold"></i>
+                <span data-config="brandName">MK HEIGHT</span>
+              </div>
+              <p class="footer-desc">
+                Experience luxury living with spectacular hospitality and finest
+                facilities in <span data-config="shortAddress">Kunadi</span>.
+              </p>
+              <div class="social-links">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="footer-col">
+              <h4 class="footer-title">Quick Links</h4>
+              <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Our Facilities -->
+            <div class="footer-col">
+              <h4 class="footer-title">Our Facilities</h4>
+              <ul class="footer-links">
+                <li><a href="#rooms">Premium Rooms</a></li>
+                <li><a href="#dining">Hygienic Mess</a></li>
+                <li><a href="#gallery">Reading Library</a></li>
+                <li><a href="/transport.html">Transport Service</a></li>
+                <li><a href="#why-us">24/7 Security</a></li>
+                <li><a href="#why-us">Safe Environment</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 4: Contact Info -->
+            <div class="footer-col contact-col">
+              <h4 class="footer-title">Contact Info</h4>
+              <ul class="contact-list">
+                <li>
+                  <i class="fa-solid fa-location-dot text-gold"></i>
+                  <span data-config="address"
+                    >Plot No -3, Near Suwalka Emerald, Bundi Road, Kunadi,
+                    Kota-Rajasthan, 324008</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-phone text-gold"></i>
+                  <span data-config="phone">+91 80944 44307</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-envelope text-gold"></i>
+                  <span data-config="email">hotelmkheight@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="container">
+          <p>
+            &copy; 2024 <span data-config="brandName">MK HEIGHT</span>. All
+            rights reserved.
+          </p>
+          <div class="footer-legal-links">
+            <a href="/privacy.html">Privacy Policy</a>
+            <span>|</span>
+            <a href="/terms.html">Terms & Conditions</a>
+            <span>|</span>
+            <a href="/refund.html">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Sign In / Sign Up Modal -->
+    <div id="signinModal" class="signin-modal">
+      <div class="signin-modal-content">
+        <button class="signin-close" onclick="closeSigninModal()">
+          &times;
+        </button>
+        <div class="signin-header">
+          <div class="signin-logo">
+            <i class="fa-solid fa-crown"></i>
+            <span data-config="brandName">MK HEIGHT</span>
+          </div>
+          <!-- Tab Switcher -->
+          <div class="auth-tabs">
+            <button
+              class="auth-tab active"
+              data-tab="signin"
+              onclick="switchAuthTab('signin')"
+            >
+              Sign In
+            </button>
+            <button
+              class="auth-tab"
+              data-tab="signup"
+              onclick="switchAuthTab('signup')"
+            >
+              Sign Up
+            </button>
+          </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <div id="signinFormContainer" class="auth-form-container active">
+          <h2>Welcome Back</h2>
+          <p>Sign in to access your account</p>
+          <form id="signinForm" class="signin-form">
+            <div class="signin-form-group">
+              <label for="signinEmail"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input
+                type="email"
+                id="signinEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signinPassword"
+                ><i class="fa-solid fa-lock"></i> Password</label
+              >
+              <input
+                type="password"
+                id="signinPassword"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+            <div id="signinError" class="signin-error"></div>
+            <button type="submit" class="signin-btn">
+              <span>Sign In</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span>or continue with</span>
+          </div>
+
+          <!-- Google Sign In Button -->
+          <button
+            type="button"
+            class="google-signin-btn"
+            onclick="handleGoogleSignIn()"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span>Sign in with Google</span>
+          </button>
+
+          <div class="signin-footer">
+            <p>
+              Don't have an account?
+              <a href="#" onclick="switchAuthTab('signup'); return false;"
+                >Sign Up</a
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signupFormContainer" class="auth-form-container">
+          <h2>Create Account</h2>
+          <p>Join MK HEIGHT as a student</p>
+          <form id="signupForm" class="signin-form">
+            <div class="signin-form-group">
+              <label for="signupName"
+                ><i class="fa-solid fa-user"></i> Full Name</label
+              >
+              <input
+                type="text"
+                id="signupName"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupEmail"
+                ><i class="fa-solid fa-envelope"></i> Email</label
+              >
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupPhone"
+                ><i class="fa-solid fa-phone"></i> Phone Number</label
+              >
+              <input
+                type="tel"
+                id="signupPhone"
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupPassword"
+                ><i class="fa-solid fa-lock"></i> Password</label
+              >
+              <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create a password (min 6 chars)"
+                required
+                minlength="6"
+              />
+            </div>
+            <div class="signin-form-group">
+              <label for="signupConfirmPassword"
+                ><i class="fa-solid fa-lock"></i> Confirm Password</label
+              >
+              <input
+                type="password"
+                id="signupConfirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+            </div>
+            <div id="signupError" class="signin-error"></div>
+            <div id="signupSuccess" class="signin-success"></div>
+            <button type="submit" class="signin-btn signup-btn">
+              <span>Create Account</span>
+              <i class="fa-solid fa-user-plus"></i>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span>or sign up with</span>
+          </div>
+
+          <!-- Google Sign Up Button -->
+          <button
+            type="button"
+            class="google-signin-btn"
+            onclick="handleGoogleSignIn()"
+          >
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path
+                fill="#4285F4"
+                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              />
+              <path
+                fill="#34A853"
+                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              />
+              <path
+                fill="#EA4335"
+                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              />
+            </svg>
+            <span>Sign up with Google</span>
+          </button>
+
+          <div class="signin-footer">
+            <p>
+              Already have an account?
+              <a href="#" onclick="switchAuthTab('signin'); return false;"
+                >Sign In</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trial Stay Booking Modal -->
+    <div
+      class="trial-stay-modal-overlay"
+      id="trialStayModalOverlay"
+      style="display: none"
+    >
+      <div class="trial-stay-modal">
+        <button class="trial-stay-modal-close" onclick="closeTrialStayModal()">
+          <i class="fa-solid fa-times"></i>
+        </button>
+        <div class="trial-stay-modal-header">
+          <div class="trial-stay-modal-badge">
+            <i class="fa-solid fa-star"></i> Trial Stay
+          </div>
+          <h2>Book Your Trial Stay</h2>
+          <p>Experience MK HEIGHT before making a commitment</p>
+        </div>
+        <form id="trialStayForm" class="trial-stay-form">
+          <div class="trial-form-row">
+            <div class="trial-form-group">
+              <label><i class="fa-solid fa-user"></i> Full Name *</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your full name"
+                required
+              />
+            </div>
+            <div class="trial-form-group">
+              <label><i class="fa-solid fa-phone"></i> Phone Number *</label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="10-digit mobile number"
+                required
+                pattern="[0-9]{10}"
+              />
+            </div>
+          </div>
+          <div class="trial-form-group">
+            <label><i class="fa-solid fa-envelope"></i> Email Address *</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="your.email@example.com"
+              required
+            />
+          </div>
+          <div class="trial-form-row">
+            <div class="trial-form-group">
+              <label
+                ><i class="fa-solid fa-calendar-alt"></i> Expected Arrival
+                Date</label
+              >
+              <input type="date" name="arrivalDate" id="trialArrivalDate" />
+            </div>
+            <div class="trial-form-group">
+              <label><i class="fa-solid fa-clock"></i> Stay Duration</label>
+              <select name="stayDuration">
+                <option value="1">1 Night</option>
+                <option value="2" selected>2 Nights</option>
+                <option value="3">3 Nights</option>
+              </select>
+            </div>
+          </div>
+          <div class="trial-form-row">
+            <div class="trial-form-group">
+              <label
+                ><i class="fa-solid fa-users"></i> Number of Guests *</label
+              >
+              <select name="numberOfGuests" required>
+                <option value="1">1 Guest</option>
+                <option value="2" selected>2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+              </select>
+            </div>
+            <div class="trial-form-group">
+              <label><i class="fa-solid fa-graduation-cap"></i> Course</label>
+              <select name="course">
+                <option value="NEET">NEET</option>
+                <option value="JEE">JEE</option>
+                <option value="Foundation">Foundation</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="trial-form-row">
+            <div class="trial-form-group">
+              <label
+                ><i class="fa-solid fa-van-shuttle"></i> Need Station
+                Pickup?</label
+              >
+              <select name="pickupLocation">
+                <option value="none">No, I'll come on my own</option>
+                <option value="kota_junction">Yes - Kota Junction</option>
+                <option value="dakniya_talawa">Yes - Dakniya Talawa</option>
+              </select>
+            </div>
+          </div>
+          <div class="trial-form-group">
+            <label
+              ><i class="fa-solid fa-message"></i> Any Message (Optional)</label
+            >
+            <textarea
+              name="message"
+              placeholder="Anything you'd like us to know..."
+              rows="2"
+            ></textarea>
+          </div>
+          <div class="trial-form-price-summary">
+            <div class="price-row">
+              <span>Trial Stay Price</span>
+              <span class="price-value"
+                >₹<span id="trialModalPrice">500</span>/night</span
+              >
+            </div>
+            <p class="price-note">
+              <i class="fa-solid fa-check-circle"></i> Free station pickup
+              included
+            </p>
+          </div>
+          <button type="submit" class="trial-form-submit">
+            <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
+          </button>
+          <p class="trial-form-note">
+            We'll call you within 2 hours to confirm your booking.
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Sticky Booking Button -->
+    <a
+      href="/room.html?type=single"
+      class="sticky-booking-btn"
+      id="stickyBookingBtn"
+    >
+      <i class="fa-solid fa-calendar-check"></i>
+      <span>Reserve Your Room</span>
+    </a>
+
+    <!-- Mobile Sticky Bar -->
+    <div class="mobile-sticky-bar" id="mobileStickyBar">
+      <a href="tel:+918094444307" class="mobile-sticky-item">
+        <i class="fa-solid fa-phone"></i>
+        <span>Call Now</span>
+      </a>
+      <a href="/room.html?type=single" class="mobile-sticky-item primary">
+        <i class="fa-solid fa-bed"></i>
+        <span>Book Room</span>
+      </a>
+      <a
+        href="https://wa.me/918094444307"
+        target="_blank"
+        class="mobile-sticky-item"
+      >
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

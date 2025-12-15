@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | MK HEIGHT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+    
+    <!-- Config System -->
+    <script src="../js/site-config.js"></script>
+    <script src="../js/config-loader.js"></script>
+
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-crown"></i>
+                    <span data-config="brandName">MK HEIGHT</span>
+                </div>
+                <span class="admin-badge">ADMIN</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="students">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" class="nav-item" data-section="rooms">
+                    <i class="fa-solid fa-door-open"></i>
+                    <span>Room Occupancy</span>
+                </a>
+                <a href="#" class="nav-item" data-section="rent">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    <span>Rent</span>
+                </a>
+                <a href="#" class="nav-item" data-section="activity">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Activity</span>
+                </a>
+                <a href="#" class="nav-item" data-section="users">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <span>User Management</span>
+                </a>
+                <a href="#" class="nav-item" data-section="queries">
+                    <i class="fa-solid fa-question-circle"></i>
+                    <span>Booking Queries</span>
+                    <span class="nav-badge" id="queriesNavBadge" style="display: none;">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="trialstay">
+                    <i class="fa-solid fa-bed"></i>
+                    <span>Trial Stay</span>
+                    <span class="nav-badge" id="trialStayNavBadge" style="display: none;">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="contactqueries">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>Contact Queries</span>
+                    <span class="nav-badge" id="contactQueriesNavBadge" style="display: none;">0</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Admin</span>
+                        <span class="user-role" id="userRole">Administrator</span>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="content-header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1 id="pageTitle">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <a href="/" class="btn-visit-site" target="_blank">
+                        <i class="fa-solid fa-external-link-alt"></i>
+                        Visit Site
+                    </a>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h2>Welcome back, <span id="welcomeName">Admin</span>!</h2>
+                        <p>Here's what's happening with <span data-config="brandName">MK HEIGHT</span> today.</p>
+                    </div>
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="activeUsers">0</h3>
+                            <p>Active Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalManagers">0</h3>
+                            <p>Managers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-headset"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalReception">0</h3>
+                            <p>Reception</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="showSection('users'); openAddUserModal()">
+                            <i class="fa-solid fa-user-plus"></i>
+                            <span>Add New User</span>
+                        </button>
+                        <a href="/" class="action-btn" target="_blank">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>View Website</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Students Section -->
+            <section id="students" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-user-graduate"></i> Students</h2>
+                    <button class="btn-primary" onclick="openAddStudentModal()">
+                        <i class="fa-solid fa-plus"></i>
+                        Add New Student
+                    </button>
+                </div>
+
+                <!-- Student Stats -->
+                <div class="stats-grid student-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalStudents">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="activeStudents">0</h3>
+                            <p>Active</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-door-open"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="occupiedRooms">0</h3>
+                            <p>Rooms Occupied</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filters -->
+                <div class="students-filters">
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" id="studentSearch" placeholder="Search students..." onkeyup="filterStudents()">
+                    </div>
+                    <div class="filter-group">
+                        <select id="studentStatusFilter" onchange="loadStudents()">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="checkout">Checked Out</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <select id="studentCoachingFilter" onchange="loadStudents()">
+                            <option value="">All Coaching</option>
+                            <option value="Allen">Allen</option>
+                            <option value="Resonance">Resonance</option>
+                            <option value="Motion">Motion</option>
+                            <option value="Vibrant">Vibrant</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Students Table -->
+                <div class="table-container">
+                    <table class="data-table students-table">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Room</th>
+                                <th>Coaching</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Students will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Rooms Section -->
+            <section id="rooms" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-door-open"></i> Room Occupancy</h2>
+                    <button class="btn-secondary" onclick="loadRoomOccupancy()">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <!-- Occupancy Stats -->
+                <div class="stats-grid room-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalRoomsCount">160</h3>
+                            <p>Total Rooms</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-bed"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="occupiedRoomsCount">0</h3>
+                            <p>Occupied</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-door-closed"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="availableRoomsCount">160</h3>
+                            <p>Available</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="occupancyRate">0%</h3>
+                            <p>Occupancy Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="room-legend">
+                    <div class="legend-item"><span class="legend-color available"></span> Available</div>
+                    <div class="legend-item"><span class="legend-color occupied"></span> Occupied</div>
+                    <div class="legend-item"><span class="legend-color partial"></span> Partial (Double)</div>
+                </div>
+
+                <!-- Floor Selector -->
+                <div class="floor-selector">
+                    <span class="floor-label">Select Floor:</span>
+                    <div class="floor-tabs" id="floorTabs">
+                        <button class="floor-tab active" data-floor="1">1</button>
+                        <button class="floor-tab" data-floor="2">2</button>
+                        <button class="floor-tab" data-floor="3">3</button>
+                        <button class="floor-tab" data-floor="4">4</button>
+                        <button class="floor-tab" data-floor="5">5</button>
+                        <button class="floor-tab" data-floor="6">6</button>
+                        <button class="floor-tab" data-floor="7">7</button>
+                        <button class="floor-tab" data-floor="8">8</button>
+                    </div>
+                </div>
+
+                <!-- Floor Layout -->
+                <div class="floor-layout">
+                    <div class="floor-header">
+                        <h3>Floor <span id="currentFloorNumber">1</span></h3>
+                    </div>
+                    
+                    <div class="floor-plan">
+                        <!-- Lift Side -->
+                        <div class="floor-side lift-side">
+                            <div class="side-label">LIFT SIDE</div>
+                            <div class="rooms-row upper" id="liftSideUpper">
+                                <!-- Rooms will be rendered here -->
+                            </div>
+                            <div class="rooms-row lower" id="liftSideLower">
+                                <!-- Rooms will be rendered here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Center (Lift & Balcony) -->
+                        <div class="floor-center">
+                            <div class="lift-area">
+                                <i class="fa-solid fa-elevator"></i>
+                                <span>LIFT</span>
+                            </div>
+                            <div class="balcony-area">
+                                <span>B<br>A<br>L<br>C<br>O<br>N<br>Y</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Opposite Side -->
+                        <div class="floor-side opposite-side">
+                            <div class="side-label">OPPOSITE SIDE</div>
+                            <div class="rooms-row upper" id="oppositeSideUpper">
+                                <!-- Rooms will be rendered here -->
+                            </div>
+                            <div class="rooms-row lower" id="oppositeSideLower">
+                                <!-- Rooms will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rent Section -->
+            <section id="rent" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-indian-rupee-sign"></i> Rent Management</h2>
+                    <button class="btn-secondary" onclick="loadRentStatus()">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <!-- Rent Stats -->
+                <div class="stats-grid rent-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="rentTotalStudents">0</h3>
+                            <p>Total Students</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="rentTotalDue">₹0</h3>
+                            <p>Total Due</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="rentTotalPaid">₹0</h3>
+                            <p>Collected</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="rentTotalPending">₹0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Month Selector -->
+                <div class="rent-filters">
+                    <div class="month-selector">
+                        <label>Select Month:</label>
+                        <input type="month" id="rentMonthSelector" onchange="loadRentStatus()">
+                    </div>
+                    <div class="filter-group">
+                        <select id="rentStatusFilter" onchange="filterRentTable()">
+                            <option value="">All Status</option>
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="overdue">Overdue</option>
+                            <option value="partial">Partial</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Rent Table -->
+                <div class="table-container">
+                    <table class="data-table rent-table">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Room</th>
+                                <th>Monthly Rent</th>
+                                <th>Paid</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rentTableBody">
+                            <!-- Rent data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Activity Section -->
+            <section id="activity" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-chart-line"></i> Activity Tracking</h2>
+                    <button class="btn-secondary" onclick="refreshActivityData()">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <!-- Activity Stats -->
+                <div class="stats-grid activity-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-dot"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="activeNowCount">0</h3>
+                            <p>Active Now</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="todayLoginsCount">0</h3>
+                            <p>Today's Logins</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="weeklyActiveCount">0</h3>
+                            <p>Weekly Active</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="todayActivitiesCount">0</h3>
+                            <p>Actions Today</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Users List -->
+                <div class="activity-panel">
+                    <div class="panel-header">
+                        <h3><i class="fa-solid fa-circle-dot pulse-green"></i> Currently Active Users</h3>
+                    </div>
+                    <div class="active-users-list" id="activeUsersList">
+                        <p class="no-data">No users currently active</p>
+                    </div>
+                </div>
+
+                <!-- Activity Filters -->
+                <div class="activity-filters">
+                    <div class="filter-group">
+                        <label>Category:</label>
+                        <select id="activityCategoryFilter" onchange="loadActivityLogs()">
+                            <option value="">All Categories</option>
+                            <option value="auth">Authentication</option>
+                            <option value="booking">Bookings</option>
+                            <option value="admin">Admin Actions</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Date:</label>
+                        <input type="date" id="activityDateFilter" onchange="loadActivityLogs()">
+                    </div>
+                </div>
+
+                <!-- Activity Log Table -->
+                <div class="table-container">
+                    <table class="data-table activity-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Category</th>
+                                <th>Details</th>
+                                <th>IP Address</th>
+                            </tr>
+                        </thead>
+                        <tbody id="activityTableBody">
+                            <!-- Activity logs will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="activity-pagination" id="activityPagination">
+                    <!-- Pagination will be loaded here -->
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-users-gear"></i> User Management</h2>
+                    <button class="btn-primary" onclick="openAddUserModal()">
+                        <i class="fa-solid fa-plus"></i>
+                        Add User
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Last Login</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Queries Section -->
+            <section id="queries" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-question-circle"></i> Booking Queries</h2>
+                    <button class="btn-secondary" onclick="loadQueries()">
+                        <i class="fa-solid fa-refresh"></i>
+                        Refresh
+                    </button>
+                </div>
+
+                <!-- Query Stats -->
+                <div class="stats-grid query-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="queriesTotal">0</h3>
+                            <p>Total Queries</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon gold">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="queriesNew">0</h3>
+                            <p>New</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="queriesContacted">0</h3>
+                            <p>Contacted</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="queriesConverted">0</h3>
+                            <p>Converted</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="query-filters" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                    <div class="filter-group">
+                        <select id="queryStatusFilter" onchange="loadQueries()">
+                            <option value="">All Status</option>
+                            <option value="new">New</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="converted">Converted</option>
+                            <option value="closed">Closed</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Queries Table -->
+                <div class="table-container">
+                    <table class="data-table queries-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Room</th>
+                                <th>Coaching</th>
+                                <th>Pickup</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="queriesTableBody">
+                            <!-- Queries will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Trial Stay Section -->
+            <section id="trialstay" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-bed"></i> Trial Stay Inquiries</h2>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid" style="margin-bottom: 30px;">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #fbbf24, #d97706);">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="trialStayNewCount">0</h3>
+                            <p>New Requests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #22c55e, #16a34a);">
+                            <i class="fa-solid fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="trialStayContactedCount">0</h3>
+                            <p>Contacted</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="trialStayBookedCount">0</h3>
+                            <p>Booked</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #6366f1, #4f46e5);">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="trialStayTotalCount">0</h3>
+                            <p>Total Inquiries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trial Stay Table -->
+                <div class="table-container">
+                    <table class="data-table trial-stay-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 90px;">Date</th>
+                                <th style="width: 180px;">Name</th>
+                                <th style="width: 120px;">Phone</th>
+                                <th style="width: 80px;">Arrival</th>
+                                <th style="width: 60px; text-align: center;">Guests</th>
+                                <th style="width: 60px; text-align: center;">Nights</th>
+                                <th style="width: 100px;">Status</th>
+                                <th style="width: 120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trialStayTableBody">
+                            <!-- Trial Stay queries will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="empty-state" id="trialStayEmptyState" style="display: none;">
+                    <i class="fa-solid fa-bed"></i>
+                    <h3>No Trial Stay Inquiries Yet</h3>
+                    <p>Trial stay requests will appear here when visitors book through the website.</p>
+                </div>
+            </section>
+
+            <!-- Contact Queries Section -->
+            <section id="contactqueries" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-envelope"></i> Contact Queries</h2>
+                </div>
+                
+                <!-- Contact Stats Cards -->
+                <div class="stats-row" style="margin-bottom: 25px;">
+                    <div class="stat-card">
+                        <i class="fa-solid fa-inbox" style="color: var(--gold);"></i>
+                        <div class="stat-info">
+                            <h3 id="contactQueriesTotal">0</h3>
+                            <p>Total Queries</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-circle-exclamation" style="color: #ef4444;"></i>
+                        <div class="stat-info">
+                            <h3 id="contactQueriesNew">0</h3>
+                            <p>New</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-phone-volume" style="color: #3b82f6;"></i>
+                        <div class="stat-info">
+                            <h3 id="contactQueriesContacted">0</h3>
+                            <p>Contacted</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+                        <div class="stat-info">
+                            <h3 id="contactQueriesClosed">0</h3>
+                            <p>Closed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Queries Table -->
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contactQueriesTableBody">
+                            <tr>
+                                <td colspan="7" class="text-center">Loading contact queries...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="contactQueriesEmptyState" style="display: none; text-align: center; padding: 60px 20px; color: var(--text-secondary);">
+                    <i class="fa-solid fa-envelope" style="font-size: 3rem; color: var(--gold); margin-bottom: 20px;"></i>
+                    <h3>No Contact Queries Yet</h3>
+                    <p>Contact form submissions will appear here.</p>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-gear"></i> Settings</h2>
+                </div>
+
+                <!-- Settings Navigation Buttons -->
+                <div class="settings-nav" style="display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap;">
+                    <button type="button" onclick="document.getElementById('changePasswordCard').scrollIntoView({behavior: 'smooth'})" style="padding: 10px 20px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-key" style="color: var(--gold); margin-right: 8px;"></i> Change Password
+                    </button>
+                    <button type="button" onclick="document.getElementById('trialStayCard').scrollIntoView({behavior: 'smooth'})" style="padding: 10px 20px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-ticket" style="color: var(--gold); margin-right: 8px;"></i> Trial Stay Offer
+                    </button>
+                    <button type="button" onclick="document.getElementById('roomPricingCard').scrollIntoView({behavior: 'smooth'})" style="padding: 10px 20px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-door-open" style="color: var(--gold); margin-right: 8px;"></i> Room Pricing & Images
+                    </button>
+                    <button type="button" onclick="document.getElementById('websiteImagesCard').scrollIntoView({behavior: 'smooth'})" style="padding: 10px 20px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-images" style="color: var(--gold); margin-right: 8px;"></i> Website Images
+                    </button>
+                    <button type="button" onclick="document.getElementById('weeklyMenuCard').scrollIntoView({behavior: 'smooth'})" style="padding: 10px 20px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary); cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">
+                        <i class="fa-solid fa-utensils" style="color: var(--gold); margin-right: 8px;"></i> Weekly Menu
+                    </button>
+                </div>
+
+                <!-- Settings Grid Layout -->
+                <div class="settings-grid" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+                    
+                    <!-- Top Row: 2 Cards Side by Side -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <!-- Change Password Card -->
+                        <div id="changePasswordCard" class="settings-card">
+                            <h3><i class="fa-solid fa-key"></i> Change Password</h3>
+                            <form id="changePasswordForm" class="settings-form">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" id="newPassword" required minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm New Password</label>
+                                    <input type="password" id="confirmPassword" required minlength="6">
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fa-solid fa-save"></i>
+                                    Update Password
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Trial Stay Settings Card -->
+                        <div id="trialStayCard" class="settings-card">
+                            <h3><i class="fa-solid fa-bed"></i> Trial Stay Offer</h3>
+                            <form id="trialStayForm" class="settings-form">
+                                <div class="form-group" style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                                    <label style="margin-bottom: 0;">Enable Trial Stay</label>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="trialStayEnabled">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="trialStayPrice"><i class="fa-solid fa-indian-rupee-sign"></i> Price per Night</label>
+                                    <input type="number" id="trialStayPrice" value="500" min="100" max="5000" style="max-width: 120px;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trialStayTitle">Headline</label>
+                                    <input type="text" id="trialStayTitle" value="Try Before You Stay" maxlength="50">
+                                </div>
+                                <div class="form-group">
+                                    <label for="trialStayDescription">Description</label>
+                                    <textarea id="trialStayDescription" rows="2" style="width: 100%; padding: 10px; background: var(--secondary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); resize: vertical;"></textarea>
+                                </div>
+                                <button type="submit" class="btn-primary">
+                                    <i class="fa-solid fa-save"></i>
+                                    Save Trial Stay
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Row: Room Settings Full Width -->
+                    <div id="roomPricingCard" class="settings-card" style="width: 100%;">
+                        <h3><i class="fa-solid fa-door-open"></i> Room Pricing & Availability</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 0.85rem;">
+                            Manage room details displayed on the main website including names, prices, descriptions, and images.
+                        </p>
+                        <p style="color: var(--gold); margin-bottom: 20px; font-size: 0.8rem;">
+                            <i class="fa-solid fa-info-circle"></i> Up to 4 images. Recommended size: <strong>1200 x 800 px</strong> (3:2 ratio, max 5MB per image)
+                        </p>
+                        <form id="roomSettingsForm" class="settings-form">
+                            <!-- Row 1: Single Room + Single Balcony -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <!-- Single Room -->
+                                <div class="room-setting-expanded" style="background: var(--secondary-dark); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 1rem;">
+                                            <i class="fa-solid fa-user"></i> Single Room
+                                        </h4>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <span style="color: var(--text-muted); font-size: 0.8rem;">Show</span>
+                                                <label class="toggle-switch" style="transform: scale(0.85);">
+                                                    <input type="checkbox" id="roomSingleEnabled" checked>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </div>
+                                            <div class="availability-btn-group" style="display: flex; gap: 4px;">
+                                                <button type="button" class="avail-btn available-btn active" data-room="single" data-status="true" onclick="setRoomAvailability('single', true, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: none; background: #22c55e; color: white;">
+                                                    <i class="fa-solid fa-check"></i> Available
+                                                </button>
+                                                <button type="button" class="avail-btn unavailable-btn" data-room="single" data-status="false" onclick="setRoomAvailability('single', false, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: 1px solid #666; background: transparent; color: #888;">
+                                                    <i class="fa-solid fa-times"></i> Sold Out
+                                                </button>
+                                                <input type="hidden" id="roomSingleAvailable" value="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Room Name</label>
+                                            <input type="text" id="roomSingleName" value="Single Room" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Price /month</label>
+                                            <div style="display: flex; align-items: center; gap: 4px;">
+                                                <span style="color: var(--text-muted); font-size: 0.85rem;">₹</span>
+                                                <input type="number" id="roomSinglePrice" value="13000" min="1000" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Description</label>
+                                        <textarea id="roomSingleDescription" rows="2" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem; resize: vertical;">Your private sanctuary for focused NEET preparation.</textarea>
+                                    </div>
+                                    <div>
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Images</label>
+                                        <div id="roomSingleImagePreview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;"></div>
+                                        <input type="file" id="roomSingleImageUpload" accept="image/*" multiple style="display: none;" onchange="uploadRoomImages('single', this)">
+                                        <button type="button" onclick="document.getElementById('roomSingleImageUpload').click()" style="padding: 6px 12px; background: var(--gold); color: #000; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-images"></i> Add Images
+                                        </button>
+                                        <input type="hidden" id="roomSingleImages" value="assets/room-1.png">
+                                    </div>
+                                </div>
+
+                                <!-- Single + Balcony -->
+                                <div class="room-setting-expanded" style="background: var(--secondary-dark); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 1rem;">
+                                            <i class="fa-solid fa-user"></i> Single + Balcony
+                                        </h4>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <span style="color: var(--text-muted); font-size: 0.8rem;">Show</span>
+                                                <label class="toggle-switch" style="transform: scale(0.85);">
+                                                    <input type="checkbox" id="roomSingleBalconyEnabled" checked>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </div>
+                                            <div class="availability-btn-group" style="display: flex; gap: 4px;">
+                                                <button type="button" class="avail-btn available-btn active" data-room="single_balcony" data-status="true" onclick="setRoomAvailability('single_balcony', true, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: none; background: #22c55e; color: white;">
+                                                    <i class="fa-solid fa-check"></i> Available
+                                                </button>
+                                                <button type="button" class="avail-btn unavailable-btn" data-room="single_balcony" data-status="false" onclick="setRoomAvailability('single_balcony', false, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: 1px solid #666; background: transparent; color: #888;">
+                                                    <i class="fa-solid fa-times"></i> Sold Out
+                                                </button>
+                                                <input type="hidden" id="roomSingleBalconyAvailable" value="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Room Name</label>
+                                            <input type="text" id="roomSingleBalconyName" value="Single Room + Balcony" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Price /month</label>
+                                            <div style="display: flex; align-items: center; gap: 4px;">
+                                                <span style="color: var(--text-muted); font-size: 0.85rem;">₹</span>
+                                                <input type="number" id="roomSingleBalconyPrice" value="14000" min="1000" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Description</label>
+                                        <textarea id="roomSingleBalconyDescription" rows="2" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem; resize: vertical;">Enjoy fresh air breaks with your own private balcony.</textarea>
+                                    </div>
+                                    <div>
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Images</label>
+                                        <div id="roomSingleBalconyImagePreview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;"></div>
+                                        <input type="file" id="roomSingleBalconyImageUpload" accept="image/*" multiple style="display: none;" onchange="uploadRoomImages('single_balcony', this)">
+                                        <button type="button" onclick="document.getElementById('roomSingleBalconyImageUpload').click()" style="padding: 6px 12px; background: var(--gold); color: #000; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-images"></i> Add Images
+                                        </button>
+                                        <input type="hidden" id="roomSingleBalconyImages" value="assets/room-1.png">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Double Room + Double Balcony -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                                <!-- Double Room -->
+                                <div class="room-setting-expanded" style="background: var(--secondary-dark); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 1rem;">
+                                            <i class="fa-solid fa-users"></i> Double Room
+                                        </h4>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <span style="color: var(--text-muted); font-size: 0.8rem;">Show</span>
+                                                <label class="toggle-switch" style="transform: scale(0.85);">
+                                                    <input type="checkbox" id="roomDoubleEnabled" checked>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </div>
+                                            <div class="availability-btn-group" style="display: flex; gap: 4px;">
+                                                <button type="button" class="avail-btn available-btn active" data-room="double" data-status="true" onclick="setRoomAvailability('double', true, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: none; background: #22c55e; color: white;">
+                                                    <i class="fa-solid fa-check"></i> Available
+                                                </button>
+                                                <button type="button" class="avail-btn unavailable-btn" data-room="double" data-status="false" onclick="setRoomAvailability('double', false, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: 1px solid #666; background: transparent; color: #888;">
+                                                    <i class="fa-solid fa-times"></i> Sold Out
+                                                </button>
+                                                <input type="hidden" id="roomDoubleAvailable" value="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Room Name</label>
+                                            <input type="text" id="roomDoubleName" value="Double Room" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Price /month</label>
+                                            <div style="display: flex; align-items: center; gap: 4px;">
+                                                <span style="color: var(--text-muted); font-size: 0.85rem;">₹</span>
+                                                <input type="number" id="roomDoublePrice" value="10000" min="1000" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Description</label>
+                                        <textarea id="roomDoubleDescription" rows="2" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem; resize: vertical;">Share your journey with a like-minded future doctor.</textarea>
+                                    </div>
+                                    <div>
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Images</label>
+                                        <div id="roomDoubleImagePreview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;"></div>
+                                        <input type="file" id="roomDoubleImageUpload" accept="image/*" multiple style="display: none;" onchange="uploadRoomImages('double', this)">
+                                        <button type="button" onclick="document.getElementById('roomDoubleImageUpload').click()" style="padding: 6px 12px; background: var(--gold); color: #000; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-images"></i> Add Images
+                                        </button>
+                                        <input type="hidden" id="roomDoubleImages" value="assets/room-1.png">
+                                    </div>
+                                </div>
+
+                                <!-- Double + Balcony -->
+                                <div class="room-setting-expanded" style="background: var(--secondary-dark); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 1rem;">
+                                            <i class="fa-solid fa-users"></i> Double + Balcony
+                                        </h4>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <span style="color: var(--text-muted); font-size: 0.8rem;">Show</span>
+                                                <label class="toggle-switch" style="transform: scale(0.85);">
+                                                    <input type="checkbox" id="roomDoubleBalconyEnabled" checked>
+                                                    <span class="toggle-slider"></span>
+                                                </label>
+                                            </div>
+                                            <div class="availability-btn-group" style="display: flex; gap: 4px;">
+                                                <button type="button" class="avail-btn available-btn active" data-room="double_balcony" data-status="true" onclick="setRoomAvailability('double_balcony', true, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: none; background: #22c55e; color: white;">
+                                                    <i class="fa-solid fa-check"></i> Available
+                                                </button>
+                                                <button type="button" class="avail-btn unavailable-btn" data-room="double_balcony" data-status="false" onclick="setRoomAvailability('double_balcony', false, this)" style="padding: 5px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; cursor: pointer; border: 1px solid #666; background: transparent; color: #888;">
+                                                    <i class="fa-solid fa-times"></i> Sold Out
+                                                </button>
+                                                <input type="hidden" id="roomDoubleBalconyAvailable" value="true">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Room Name</label>
+                                            <input type="text" id="roomDoubleBalconyName" value="Double Room + Balcony" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                        </div>
+                                        <div>
+                                            <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Price /month</label>
+                                            <div style="display: flex; align-items: center; gap: 4px;">
+                                                <span style="color: var(--text-muted); font-size: 0.85rem;">₹</span>
+                                                <input type="number" id="roomDoubleBalconyPrice" value="11000" min="1000" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-bottom: 10px;">
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Description</label>
+                                        <textarea id="roomDoubleBalconyDescription" rows="2" style="width: 100%; padding: 6px 8px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.85rem; resize: vertical;">Premium shared accommodation with a private balcony.</textarea>
+                                    </div>
+                                    <div>
+                                        <label style="color: var(--text-muted); font-size: 0.75rem; display: block; margin-bottom: 4px;">Images</label>
+                                        <div id="roomDoubleBalconyImagePreview" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;"></div>
+                                        <input type="file" id="roomDoubleBalconyImageUpload" accept="image/*" multiple style="display: none;" onchange="uploadRoomImages('double_balcony', this)">
+                                        <button type="button" onclick="document.getElementById('roomDoubleBalconyImageUpload').click()" style="padding: 6px 12px; background: var(--gold); color: #000; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                                            <i class="fa-solid fa-images"></i> Add Images
+                                        </button>
+                                        <input type="hidden" id="roomDoubleBalconyImages" value="assets/room-1.png">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary" style="margin-top: 10px;">
+                                <i class="fa-solid fa-save"></i>
+                                Save Room Settings
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Weekly Menu Settings Card -->
+                    <div id="weeklyMenuCard" class="settings-card" style="width: 100%;">
+                        <h3><i class="fa-solid fa-utensils"></i> Weekly Menu</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.85rem;">
+                            Manage the weekly mess menu displayed on the website. Set breakfast, lunch, and dinner for each day.
+                        </p>
+                        
+                        <form id="weeklyMenuForm" onsubmit="saveWeeklyMenu(event)">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">
+                                <!-- Monday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-calendar-day"></i> Monday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuMondaySpecial"> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuMondayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuMondayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuMondayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Tuesday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-calendar-day"></i> Tuesday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuTuesdaySpecial"> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuTuesdayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuTuesdayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuTuesdayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Wednesday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-calendar-day"></i> Wednesday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuWednesdaySpecial"> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuWednesdayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuWednesdayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuWednesdayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Thursday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-calendar-day"></i> Thursday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuThursdaySpecial"> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuThursdayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuThursdayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuThursdayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Friday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); border-color: var(--gold);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-star"></i> Friday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuFridaySpecial" checked> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuFridayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuFridayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuFridayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Saturday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-calendar-day"></i> Saturday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuSaturdaySpecial"> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuSaturdayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuSaturdayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuSaturdayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Sunday -->
+                                <div class="menu-day-card" style="background: var(--secondary-dark); padding: 15px; border-radius: 10px; border: 1px solid var(--border-color); border-color: var(--gold);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                        <h4 style="margin: 0; color: var(--gold); font-size: 0.95rem;">
+                                            <i class="fa-solid fa-crown"></i> Sunday
+                                        </h4>
+                                        <label style="display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--text-muted);">
+                                            <input type="checkbox" id="menuSundaySpecial" checked> Special
+                                        </label>
+                                    </div>
+                                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                                        <input type="text" id="menuSundayBreakfast" placeholder="Breakfast" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuSundayLunch" placeholder="Lunch" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                        <input type="text" id="menuSundayDinner" placeholder="Dinner" style="padding: 8px 10px; background: var(--primary-dark); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); font-size: 0.85rem;">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn-primary" style="margin-top: 20px;">
+                                <i class="fa-solid fa-save"></i>
+                                Save Menu
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Staff Management Section -->
+                    <div id="staffManagementCard" class="settings-card" style="width: 100%;">
+                        <h3><i class="fa-solid fa-users"></i> Staff Management</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 0.85rem;">
+                            Manage hostel staff displayed on the website. Add, edit, or remove team members.
+                        </p>
+                        
+                        <button type="button" onclick="openStaffModal()" class="btn-primary" style="margin-bottom: 20px;">
+                            <i class="fa-solid fa-user-plus"></i> Add Staff Member
+                        </button>
+                        
+                        <div id="staffList" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                            <!-- Staff cards loaded dynamically -->
+                            <p style="color: var(--text-muted); grid-column: 1/-1; text-align: center;">Loading staff...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Add/Edit User Modal -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fa-solid fa-user-plus"></i> Add New User</h3>
+                <button class="modal-close" onclick="closeUserModal()">&times;</button>
+            </div>
+            <form id="userForm">
+                <input type="hidden" id="userId">
+                <div class="form-group">
+                    <label for="userFullName">Full Name</label>
+                    <input type="text" id="userFullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                <div class="form-group" id="passwordGroup">
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" minlength="6">
+                    <small>Min 6 characters</small>
+                </div>
+                <div class="form-group">
+                    <label for="userRoleSelect">Role</label>
+                    <select id="userRoleSelect" required>
+                        <option value="reception">Reception</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group" id="statusGroup" style="display: none;">
+                    <label for="userStatus">Status</label>
+                    <select id="userStatus">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeUserModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="userSubmitBtn">
+                        <i class="fa-solid fa-save"></i>
+                        Save User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Staff Modal -->
+    <div id="staffModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="staffModalTitle"><i class="fa-solid fa-user-plus"></i> Add Staff Member</h3>
+                <button class="modal-close" onclick="closeStaffModal()">&times;</button>
+            </div>
+            <form id="staffForm" enctype="multipart/form-data">
+                <input type="hidden" id="staffId">
+                <div class="form-group">
+                    <label for="staffName">Full Name *</label>
+                    <input type="text" id="staffName" required placeholder="e.g. John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="staffRole">Role / Position *</label>
+                    <input type="text" id="staffRole" required placeholder="e.g. General Manager">
+                </div>
+                <div class="form-group">
+                    <label for="staffDescription">Short Description</label>
+                    <textarea id="staffDescription" rows="2" placeholder="Brief bio or tagline..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="staffIcon">Badge Icon (FontAwesome class)</label>
+                    <select id="staffIcon">
+                        <option value="fa-user-tie">👔 User Tie (Manager)</option>
+                        <option value="fa-ribbon">🎗️ Ribbon (GM)</option>
+                        <option value="fa-headset">🎧 Headset (Support)</option>
+                        <option value="fa-utensils">🍴 Utensils (Chef)</option>
+                        <option value="fa-broom">🧹 Broom (Housekeeping)</option>
+                        <option value="fa-shield-halved">🛡️ Shield (Security)</option>
+                        <option value="fa-truck">🚚 Truck (Driver)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Profile Picture</label>
+                    <div id="staffImagePreview" style="margin-bottom: 10px;"></div>
+                    <input type="file" id="staffImageUpload" accept="image/*" style="display: none;">
+                    <button type="button" onclick="document.getElementById('staffImageUpload').click()" style="padding: 8px 16px; background: var(--gold); color: #000; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
+                        <i class="fa-solid fa-camera"></i> Choose Image
+                    </button>
+                </div>
+                <div class="form-group">
+                    <label for="staffOrder">Display Order</label>
+                    <input type="number" id="staffOrder" value="0" min="0" placeholder="Lower numbers appear first">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeStaffModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="staffSubmitBtn">
+                        <i class="fa-solid fa-save"></i>
+                        Save Staff
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Record Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-indian-rupee-sign"></i> Record Payment</h3>
+                <button class="modal-close" onclick="closePaymentModal()">&times;</button>
+            </div>
+            <form id="paymentForm">
+                <input type="hidden" id="paymentStudentId">
+                <input type="hidden" id="paymentMonth">
+                
+                <div class="payment-student-info" id="paymentStudentInfo">
+                    <!-- Student info will be loaded here -->
+                </div>
+                
+                <div class="form-group">
+                    <label>Amount Due</label>
+                    <input type="text" id="paymentAmountDue" readonly style="background: var(--secondary-dark);">
+                </div>
+                
+                <div class="form-group">
+                    <label>Amount Paid *</label>
+                    <input type="number" id="paymentAmountPaid" required min="0">
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="paymentMethod">
+                        <option value="cash">Cash</option>
+                        <option value="upi">UPI</option>
+                        <option value="bank_transfer">Bank Transfer</option>
+                        <option value="cheque">Cheque</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Transaction ID (Optional)</label>
+                    <input type="text" id="paymentTransactionId" placeholder="UPI/Bank Ref No.">
+                </div>
+                
+                <div class="form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea id="paymentNotes" rows="2"></textarea>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-save"></i>
+                        Save Payment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Student Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content student-modal-content">
+            <div class="modal-header">
+                <h3 id="studentModalTitle"><i class="fa-solid fa-user-plus"></i> Add New Student</h3>
+                <button class="modal-close" onclick="closeStudentModal()">&times;</button>
+            </div>
+            <form id="studentForm" enctype="multipart/form-data">
+                <input type="hidden" id="studentId">
+                
+                <div class="student-form-grid">
+                    <!-- Photo Upload -->
+                    <div class="form-section photo-section">
+                        <div class="photo-upload-box" onclick="document.getElementById('studentPhoto').click()">
+                            <img id="studentPhotoPreview" src="" alt="" style="display: none;">
+                            <div class="photo-placeholder" id="photoPlaceholder">
+                                <i class="fa-solid fa-camera"></i>
+                                <span>Upload Photo</span>
+                            </div>
+                        </div>
+                        <input type="file" id="studentPhoto" name="photo" accept="image/*" style="display: none;" onchange="previewStudentPhoto(this)">
+                        <small>Passport size photo</small>
+                    </div>
+                    
+                    <!-- Personal Details -->
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-user"></i> Personal Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" id="studentName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" id="studentEmail" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Father's Name</label>
+                                <input type="text" id="studentFatherName">
+                            </div>
+                            <div class="form-group">
+                                <label>Mother's Name</label>
+                                <input type="text" id="studentMotherName">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" id="studentDOB">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="studentGender">
+                                    <option value="">Select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Blood Group</label>
+                                <select id="studentBloodGroup">
+                                    <option value="">Select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Aadhar Number</label>
+                                <input type="text" id="studentAadhar" maxlength="12" placeholder="12-digit number">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Details -->
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-phone"></i> Contact Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Phone Number *</label>
+                                <input type="tel" id="studentPhone" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Emergency Contact</label>
+                                <input type="tel" id="emergencyPhone">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Emergency Contact Name</label>
+                                <input type="text" id="emergencyName">
+                            </div>
+                            <div class="form-group">
+                                <label>Relation</label>
+                                <input type="text" id="emergencyRelation" placeholder="e.g. Father, Mother">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea id="studentAddress" rows="2"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" id="studentCity">
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" id="studentState">
+                            </div>
+                            <div class="form-group">
+                                <label>Pincode</label>
+                                <input type="text" id="studentPincode" maxlength="6">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Hostel Details -->
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-bed"></i> Hostel Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Room Number</label>
+                                <input type="text" id="studentRoomNumber" placeholder="e.g. 101, 201A">
+                            </div>
+                            <div class="form-group">
+                                <label>Room Type</label>
+                                <select id="studentRoomType">
+                                    <option value="">Select</option>
+                                    <option value="single">Single</option>
+                                    <option value="single_balcony">Single + Balcony</option>
+                                    <option value="double">Double Sharing</option>
+                                    <option value="double_balcony">Double + Balcony</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Joining Date</label>
+                                <input type="date" id="studentJoiningDate">
+                            </div>
+                            <div class="form-group">
+                                <label>Expected Checkout</label>
+                                <input type="date" id="studentCheckoutDate">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label><i class="fa-solid fa-indian-rupee-sign"></i> Monthly Rent *</label>
+                                <input type="number" id="studentMonthlyRent" required min="0" placeholder="e.g. 6000">
+                            </div>
+                            <div class="form-group">
+                                <label>Rent Due Day</label>
+                                <select id="studentRentDueDay">
+                                    <option value="1">1st of month</option>
+                                    <option value="5">5th of month</option>
+                                    <option value="10">10th of month</option>
+                                    <option value="15">15th of month</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Academic Details -->
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-graduation-cap"></i> Academic Details</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Coaching Center</label>
+                                <select id="studentCoaching">
+                                    <option value="">Select</option>
+                                    <option value="Allen">Allen</option>
+                                    <option value="Resonance">Resonance</option>
+                                    <option value="Motion">Motion</option>
+                                    <option value="Vibrant">Vibrant</option>
+                                    <option value="Nucleus">Nucleus</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Target Exam</label>
+                                <select id="studentTargetExam">
+                                    <option value="">Select</option>
+                                    <option value="NEET">NEET</option>
+                                    <option value="JEE Main">JEE Main</option>
+                                    <option value="JEE Advanced">JEE Advanced</option>
+                                    <option value="Foundation">Foundation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Course/Program</label>
+                                <input type="text" id="studentCourse" placeholder="e.g. NEET Achiever Batch">
+                            </div>
+                            <div class="form-group">
+                                <label>Batch</label>
+                                <input type="text" id="studentBatch" placeholder="e.g. 2024-25">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes -->
+                    <div class="form-section full-width">
+                        <div class="form-group">
+                            <label>Notes (Optional)</label>
+                            <textarea id="studentNotes" rows="2" placeholder="Any additional information..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" onclick="closeStudentModal()">Cancel</button>
+                    <button type="submit" class="btn-primary" id="studentSubmitBtn">
+                        <i class="fa-solid fa-save"></i>
+                        Save Student
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js?v=2"></script>
+</body>
+</html>

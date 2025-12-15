@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Access QR Code</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+        h1 { margin-bottom: 0.5rem; }
+        p { margin-bottom: 2rem; color: #666; }
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Scan to Open on Mobile</h1>
+        <p>Make sure your phone is on the same Wi-Fi network.</p>
+        <div id="qrcode"></div>
+        <h3 id="url-display"></h3>
+    </div>
+
+    <script>
+        const ip = "10.219.149.57";
+        const port = "3000";
+        const url = `http://${ip}:${port}`;
+        
+        document.getElementById('url-display').textContent = url;
+        
+        new QRCode(document.getElementById("qrcode"), {
+            text: url,
+            width: 256,
+            height: 256,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    </script>
+</body>
+</html>

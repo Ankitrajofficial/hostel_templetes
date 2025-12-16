@@ -17,9 +17,9 @@ const createAdmin = async () => {
 
         // Create admin user
         const admin = new User({
-            name: 'Admin',
-            email: 'admin@mkheight.com',
-            password: 'admin123',  // Change this password after first login!
+            name: 'Kanchan Mohan Admin',
+            email: 'admin@kanchanmohan.com',
+            password: 'kanchan@2024',  // Change this password after first login!
             role: 'admin',
             isActive: true
         });
@@ -28,8 +28,8 @@ const createAdmin = async () => {
 
         console.log('✅ Admin user created successfully!');
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-        console.log('📧 Email: admin@mkheight.com');
-        console.log('🔑 Password: admin123');
+        console.log('📧 Email: admin@kanchanmohan.com');
+        console.log('🔑 Password: kanchan@2024');
         console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
         console.log('⚠️  IMPORTANT: Change this password after first login!');
         
